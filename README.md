@@ -1,6 +1,9 @@
 # MCQ Question Generator
 Welcome to the MCQ Question Generator! This project leverages advanced NLP models to automatically generate multiple-choice questions (MCQs) from text data, making it an invaluable resource for educators, trainers, and content creators.
 
+## APP: 
+![Project Screenshot](https://github.com/testgithubrittttttt/Q---Genie/blob/main/Screenshot.png "Project Screenshot")
+
 ## Table of Contents
 - Introduction
 - Features
