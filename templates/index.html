@@ -1,1 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate MCQs</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Body and Background Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            background-attachment: fixed;
+            animation: gradientBG 10s ease infinite;
+        }
 
+        @keyframes gradientBG {
+            0% {
+                background: linear-gradient(135deg, #1e3c72, #2a5298);
+            }
+            50% {
+                background: linear-gradient(135deg, #2a5298, #1e3c72);
+            }
+            100% {
+                background: linear-gradient(135deg, #1e3c72, #2a5298);
+            }
+        }
+
+        /* Main Container Styling */
+        .container {
+            text-align: center;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            background: linear-gradient(to right, #6e8efb, #a777e3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2), 0 0 10px rgba(110, 142, 251, 0.5);
+            }
+            to {
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(167, 119, 227, 0.7);
+            }
+        }
+
+        /* Paragraph and Label Styling */
+        p.lead, .form-group label {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form Input and Dropdown Styling */
+        .form-control-file,
+        .form-control {
+            display: block;
+            margin: 10px auto;
+            width: 90%;
+            max-width: 450px;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background-color: #f7f8fa;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .form-control-file {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form-control-file:hover {
+            background: linear-gradient(135deg, #a777e3, #6e8efb);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control:hover,
+        .form-control:focus {
+            border-color: #a777e3;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transform: scale(1.03);
+        }
+
+        /* Enhanced Dropdown Styling */
+        .form-control {
+            background: #fff;
+            border: 2px solid #a777e3;
+            border-radius: 12px;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .form-control option {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* Scrollbar Styling for Dropdown */
+        .form-control::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .form-control::-webkit-scrollbar-thumb {
+            background: #6e8efb;
+            border-radius: 8px;
+        }
+
+        .form-control::-webkit-scrollbar-thumb:hover {
+            background: #a777e3;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(to right, #6e8efb, #a777e3);
+            border: none;
+            font-size: 1.3rem;
+            padding: 12px 40px;
+            margin-top: 30px;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #a777e3, #6e8efb);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Media Query for Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-control-file,
+            .form-control {
+                width: 90%;
+            }
+
+            .btn-primary {
+                font-size: 1.1rem;
+                padding: 10px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Q-Genie</h1>
+        <p class="lead">This application generates multiple-choice questions (MCQs) based on the provided text. You can either upload a PDF or TXT file containing the text.</p>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload File(s) (PDF or TXT)</label>
+                <input type="file" class="form-control-file" id="file" name="files[]" multiple>
+            </div>
+            <div class="form-group">
+                <label for="num_questions">Number of Questions:</label>
+                <select class="form-control" id="num_questions" name="num_questions">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate MCQs</button>
+        </form>
+    </div>
+</body>
+</html>

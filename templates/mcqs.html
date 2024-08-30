@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated MCQs</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            margin-top: 5%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .form-check-label {
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .correct-answer {
+            display: none;
+            color: #28a745;
+            font-weight: bold;
+        }
+        #show-results-btn {
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Start of content -->
+    <div class="container">
+        <h1 class="text-center mb-4">Generated MCQs</h1>
+        <div id="mcqs-container">
+            {% for index, mcq in mcqs %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Q{{ index }}: {{ mcq[0] }}?</h5>
+                        <form>
+                            {% set options = ['A', 'B', 'C', 'D'] %}
+                            {% set num_choices = mcq[1]|length %}
+                            {% for choice_index in range(num_choices) %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="answer{{ index }}" id="choice{{ index }}{{ choice_index }}" value="{{ choice_index }}">
+                                    <label class="form-check-label" for="choice{{ index }}{{ choice_index }}">
+                                        {{ options[choice_index] }}: {{ mcq[1][choice_index] }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </form>
+                        <!-- Display the correct answer with a class -->
+                        <small class="text-muted correct-answer">Correct Answer: {{ mcq[2] }}</small>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- Button to show results -->
+            <button id="show-results-btn" class="btn btn-primary">Show Results</button>
+        </div>
+    </div>
+    <!-- End of content -->
+
+    <!-- JavaScript to handle showing results -->
+    <script>
+        document.getElementById('show-results-btn').addEventListener('click', function() {
+            // Get all elements with the 'correct-answer' class
+            var correctAnswers = document.getElementsByClassName('correct-answer');
+            // Loop through each element and display it
+            for (var i = 0; i < correctAnswers.length; i++) {
+                correctAnswers[i].style.display = 'block';
+            }
+            // Hide the button after showing results
+            this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
